@@ -1,9 +1,30 @@
 <p>Welcome! You have signed up successfully.</p>
 
-<h1>User info</h1>
-<%= image_tag @user.get_profile_image(100,100) %>
+
+  <h1>User info</h1>
+</div>
+  <div class="container">
+    <div class="row">
+      <table class="table table-striped">
+        <%= image_tag @user.get_profile_image(100,100) %>
+    </div>
+  </div>
+</div>
+  <p>
+      <th>name</th>
+      <%= current_user.name %>
+  </p>
+  <p>
+    <tr>
+      <th>introduction</th>
+    </tr>
+  </p>
+
+  <%= link_to edit_user_path, class: "btn " %>
+  <i class="fa-solid fa-user-gear"></i>
 
 
+</br>
 
 <h2>New Book</h2>
   <% if @book.errors.any? %>
@@ -28,3 +49,4 @@
   <%= f.submit 'Create Book' %>
 <% end %>
   </br>
+</table>
