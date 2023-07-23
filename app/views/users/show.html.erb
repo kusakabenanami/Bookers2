@@ -1,31 +1,35 @@
 <p>Welcome! You have signed up successfully.</p>
 
 
-  <h1>User info</h1>
-</div>
+
   <div class="container">
     <div class="row">
-      <table class="table table-striped">
-        <%= image_tag @user.get_profile_image(100,100) %>
+
     </div>
   </div>
 </div>
-  <p>
-      <th>name</th>
-      <%= current_user.name %>
-  </p>
-  <p>
+
+<div>
+ <h1>User info</h1>
+   <%= image_tag @user.get_profile_image(100,100) %>
+  <table class="table table-striped">
     <tr>
-      <th>introduction</th>
+      <td>name</td>
+      <td><%= current_user.name %></td>
     </tr>
-  </p>
+    <tr>
+      <td>introduction</td>
+      <td><%= current_user.introduction %></td>
+    </tr>
+    </table>
 
-  <%= link_to edit_user_path, class: "btn " %>
+  <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary" do %>
   <i class="fa-solid fa-user-gear"></i>
-
+  <% end %>
+</div>
 
 </br>
-
+<div>
 <h2>New Book</h2>
   <% if @book.errors.any? %>
   <%= @book.errors.count %>errors prohibited this book from being saved:
@@ -49,4 +53,4 @@
   <%= f.submit 'Create Book' %>
 <% end %>
   </br>
-</table>
+</div>
