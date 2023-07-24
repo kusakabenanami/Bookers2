@@ -7,18 +7,17 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @book = Book.new
-    
   end
 
-  def view
-  end
-
-  def create
-    @user_image = UserImage.new(user_image_params)
-    @user_image.user_id = current_user.id
-    @user_image.save
-    redirect_to user_images_path
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = "Book was successfully updated."
+      redirect_to user_path(@user.id)
+    else
+      @users = User.all
+      render :edit
+    end
   end
 
   private

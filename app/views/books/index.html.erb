@@ -1,43 +1,16 @@
+
+<h2>Books</h2>
 <% @books.each do |book| %>
   <div>
-    <%= link_to book_path(book.id) do %>
-      <%= image_tag book.get_image %>
-    <% end %>
-    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
-    <p>ショップ名：<%= book.shop_name %></p>
-    <p>説明：<%= book.caption %></p>
-    <p>ユーザーネーム：<%= book.user.name %></p>
-    <p>投稿日時：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
-    <% if @book.user == current_user %>
-      <%= link_to "削除", book_path(@book), method: :delete %>
-    <% end %>
+  <%= link_to image_tag user_path(book.user) do %>
+    <p><%= image_tag book.user.get_profile_image(100, 100) %></p>
+  <% end %>
+    <li><%= link_to book.title, book_path(book) %></li>
+    <p><%= book.body %></p>
   </div>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <td>name</td>
-      <td>introduction</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @books.each do |book| %>
-    <tr>
-      <td><%= book.title %></td>
-      <td><%= book.body %></td>
-      <td><%= link_to "Show",book_path(book.id) %></td>
-      <td><%= link_to "Edit",edit_book_path(book.id) %></td>
-      <td><%= link_to "Destroy",book_path(book.id), method: :delete, "data-confirm" => "Are you sure？" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
-<!--新規入力フォーム-->
-  <h2>New Book</h2>
+<h2>New Book</h2>
   <% if @book.errors.any? %>
   <%= @book.errors.count %>errors prohibited this book from being saved:
 
@@ -48,15 +21,16 @@
   </ul>
 <% end %>
 
-<%= form_with model: @book, url: '/books', method: :post do |f| %>
+<%= form_with model: @book, url: books_path, method: :post do |f| %>
 
   <h4>Title</h4>
   <%= f.text_field :title %>
 
-  <h4>Body</h4>
+  <h4>Opinion</h4>
   <%= f.text_area :body %>
 
   <br>
   <%= f.submit 'Create Book' %>
 <% end %>
   </br>
+</div>

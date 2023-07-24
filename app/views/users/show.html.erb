@@ -1,15 +1,9 @@
 <p>Welcome! You have signed up successfully.</p>
 
-
-
   <div class="container">
     <div class="row">
 
-    </div>
-  </div>
-</div>
-
-<div>
+<div class="col-lg-4">
  <h1>User info</h1>
    <%= image_tag @user.get_profile_image(100,100) %>
   <table class="table table-striped">
@@ -22,14 +16,10 @@
       <td><%= current_user.introduction %></td>
     </tr>
     </table>
-
   <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary" do %>
   <i class="fa-solid fa-user-gear"></i>
   <% end %>
-</div>
 
-</br>
-<div>
 <h2>New Book</h2>
   <% if @book.errors.any? %>
   <%= @book.errors.count %>errors prohibited this book from being saved:
@@ -41,7 +31,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @book, url: '/books', method: :post do |f| %>
+<%= form_with model: @book, url: books_path, method: :post do |f| %>
 
   <h4>Title</h4>
   <%= f.text_field :title %>
@@ -54,3 +44,27 @@
 <% end %>
   </br>
 </div>
+
+
+  <div class="col-lg-8">
+<h1>Books</h1>
+  <table class="table table-striped">
+    <th>
+      <td>Title</td>
+    </th>
+    <th>
+      <td>Opinion</td>
+    </th>
+  </table>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

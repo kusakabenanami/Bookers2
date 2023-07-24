@@ -4,22 +4,22 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
-  # 投稿データの保存
   def create
-    @book = book.new(book_params)
-    @book.user_id = current_user.id
-    @book.save
-    redirect_to books_path
+      @book = Book.new(book_params)
+      @book.user_id = current_user.id
+    if @book.save
+      redirect_to book_path(@book.id), notice: "You have created book successfully."
+    end
   end
 
   def index
     @books = Book.all
-    @books = Book.page(params[:page])
+    @book = Book.new
   end
 
   def show
     @book = Book.find(params[:id])
-    @book_comment = Book.new
+    @book_new = Book.new
   end
 
   def update
@@ -43,7 +43,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :user_id, :image)
+    params.require(:book).permit(:title, :body)
   end
 
 end
