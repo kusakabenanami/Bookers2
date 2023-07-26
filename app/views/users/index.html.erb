@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-3">
-      <%= render 'users/list', user: current_user, book_new: @book %>
+      <%= render 'list', user: current_user, book_new: @book %>
     </div>
 
     <div class="col-lg-8">
-      <h2>Books</h2>
+      <h2>Users</h2>
         <table class="table table-striped">
           <th>
-            <td>Title</td>
+            <td>image</td>
           </th>
           <th>
-            <td>Opinion</td>
+            <td>name</td>
           </th>
             <% @books.each do |book| %>
             <tr>
