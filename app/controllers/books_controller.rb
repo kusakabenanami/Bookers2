@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit,:update]
 
   def new
     @book = Book.new
@@ -9,6 +10,9 @@ class BooksController < ApplicationController
       @book.user_id = current_user.id
     if @book.save
       redirect_to book_path(@book.id), notice: "You have created book successfully."
+    else
+      @books = Book.all
+      render :index
     end
   end
 
@@ -46,6 +50,13 @@ class BooksController < ApplicationController
 
   # 投稿データのストロングパラメータ
   private
+
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    unless book.user.id == current_user.id
+      redirect_to books_path
+    end
+  end
 
   def book_params
     params.require(:book).permit(:title, :body)
